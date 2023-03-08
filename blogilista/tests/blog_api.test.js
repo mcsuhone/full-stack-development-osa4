@@ -9,6 +9,7 @@ const api = supertest(app)
 const Blog = require('../models/blog')
 
 mongoose.connect(config.MONGODB_URI)
+
 describe('when there is initially some blogs saved', () => {
   beforeEach(async () => {
     await Blog.deleteMany({})

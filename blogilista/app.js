@@ -4,6 +4,7 @@ const app = express()
 const cors = require('cors')
 var morgan = require('morgan')
 const blogsRouter = require('./controllers/blogsRouter')
+const usersRouter = require('./controllers/usersRouter')
 const middleware = require('./utils/middleware')
 const logger = require('./utils/logger')
 const mongoose = require('mongoose')
@@ -28,6 +29,7 @@ if (process.env.NODE_ENV !== 'test') {
 }
 
 app.use('/api/blogs', blogsRouter)
+app.use('/api/users', usersRouter)
 
 app.use(middleware.unknownEndpoint)
 app.use(middleware.errorHandler)
