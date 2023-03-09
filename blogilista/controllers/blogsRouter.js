@@ -66,13 +66,19 @@ blogsRouter.delete('/:id', async (request, response, next) => {
 })
 
 blogsRouter.put('/:id', async (request, response, next) => {
-  const { title, author, url, likes } = request.body
+  const { title, author, url, likes, userId } = request.body
+  const blog = await Blog.findById(request.params.id)
   try {
-    const updatedBlog = await Blog.findByIdAndUpdate(request.params.id,
-      { title, author, url, likes },
-      { new: true, runValidators: true, context: 'query' }
-    )
-    response.json(updatedBlog)
+    if (blog && request.user && blog.user.toString() === request.user._id.toString()) {
+      const updatedBlog = await Blog.findByIdAndUpdate(request.params.id,
+        { title, author, url, likes, userId },
+        { new: true, runValidators: true, context: 'query' }
+      )
+      response.json(updatedBlog)
+    }
+    else {
+      response.status(401).json({ error: 'user not authenticated' })
+    }
   } catch(exception) {
     next(exception)
   }
