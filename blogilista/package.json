@@ -6,10 +6,11 @@
   "scripts": {
     "start": "cross-env NODE_ENV=production node index.js",
     "dev": "cross-env NODE_ENV=development nodemon index.js",
-    "build:ui": "rm -r build && cd ../../full-stack-development-osa5 && npm run build && cp -r build ../full-stack-development-osa4/blogilista",
+    "build:ui": "cd ../../full-stack-development-osa5 && npm run build && rm -r ../full-stack-development-osa4/blogilista/build && cp -r build ../full-stack-development-osa4/blogilista",
     "lint": "eslint .",
     "test": "cross-env NODE_ENV=test jest --verbose --runInBand",
-    "test:users": "cross-env NODE_ENV=test jest --verbose --runInBand -- tests/users.test.js"
+    "test:users": "cross-env NODE_ENV=test jest --verbose --runInBand -- tests/users.test.js",
+    "start:test": "cross-env NODE_ENV=test node index.js"
   },
   "repository": {
     "type": "git",
